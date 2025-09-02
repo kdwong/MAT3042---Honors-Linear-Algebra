@@ -191,7 +191,7 @@ Now we can make precise which algebraic objects we can generalize from $\mathbb{
         \item $\mathbb{Z}$ is not a field since $\frac{1}{5} = 5^{-1}$ does not exist in $\mathbb{Z}$. 
         \item $\mathbb{Z}_6$ is not a field for a slightly different reason - $[5] \cdot [5] = [25] = [1]$ in $\mathbb{Z}_6$, so $[5]^{-1} = [5]$ has an inverse. However, $[2]^{-1}$ does not exist.
         \item  $\mathbb{Q}$, $\mathbb{R}$, $\mathbb{C}$ are fields.
-        \item In general, $\mathbb{Z}_p$ is a field if and only if $p$ is a prime number. Indeed, for any $[a] \neq [0]$, one has $\mathrm{gcd}(a,p) = 1$ and by Bezout's theorem, there exists integers $r, s \in \mathbb{Z}$ such that
+        \item In general, $\mathbb{Z}_p$ is a field if and only if $p$ is a prime number. Indeed, for any $[a] \neq [0]$, one has $\mathrm{gcd}(a,p) = 1$ and by Bezout's theorem (see \autoref{thm:bezout} below for a version of the theorem in terms of polynomials), there exists integers $r, s \in \mathbb{Z}$ such that
         $$1 = ar + ps$$
         and hence 
         $$[1] = [a]\cdot [r] + [p]\cdot [s] = [a]\cdot [r] + [0]\cdot [s] = [a]\cdot [r],$$
@@ -206,7 +206,7 @@ for some prime number $p$, with $\mathrm{char}(\mathbb{F}) = p$.
 \section{Polynomials}
 
 \begin{definition}  
-Let $F$ be a field. A polynomial over $F$ has the form
+Let $\mathbb{F}$ be a field. A polynomial over $\mathbb{F}$ has the form
     \[
         p(x) = a_n x^n + \dots + a_1 x + a_0, \quad (a_0 \neq 0)
     \]
@@ -216,11 +216,11 @@ Let $F$ be a field. A polynomial over $F$ has the form
     \item $n$ is called the \textit{degree}; $a_n$ is called the \textit{leading coefficient}; 
     \item $a_0, \dots, a_n$ are called the \textit{coefficients}.
 \end{enumerate}
-    A polynomial over $F$ is 
+    A polynomial $p(x)$ over $\mathbb{F}$ is 
 \begin{enumerate}
     \item \textit{monic} if its leading coefficient is 1.
 
-    \item \textit{irreducible} if for any $q(x), r(x) \in F[x]$,
+    \item \textit{irreducible} if for any $q(x), r(x) \in \mathbb{F}[x]$,
     \[
         p(x) = q(x)r(x) \quad \Rightarrow \quad q(x) \text{ or } r(x) \text{ is constant}.
     \]
@@ -236,7 +236,7 @@ The polynomial $p(x) = x^2 + 1$ is irreducible over $\mathbb{R}$ but reducible o
 \end{example}
 
 \begin{definition}  
-If $p(x) = q(x)r(x)$ with $p,q,r \in F[x]$, then:
+If $p(x) = q(x)r(x)$ with $p,q,r \in \mathbb{F}[x]$, then:
 \begin{itemize}
     \item $p(x)$ is divisible by $q(x)$,
     \item $q(x)$ is a factor of $p(x)$,
@@ -247,11 +247,11 @@ If $p(x) = q(x)r(x)$ with $p,q,r \in F[x]$, then:
 
 For polynomials over a field, one can always factorize any polynomial into irreducible factors:
 \begin{theorem} [Unique Factorization] 
-Let $F$ be a field. Then every $f(x) \in F[x]$ can be factorized as
+Let $\mathbb{F}$ be a field. Then every $f(x) \in \mathbb{F}[x]$ can be factorized as
 \[
     f(x) = a_n p_1(x)^{r_1} \cdots p_m(x)^{r_m}
 \]
-where $p_j$ are monic, irreducible, and distinct. This expression is unique up to the permutation of factors.
+where $p_j \in \mathbb{F}[x]$ are monic, irreducible, and distinct. This expression is unique up to the permutation of factors.
 \end{theorem}
 
 \begin{definition}  
@@ -265,7 +265,7 @@ where $p_j$ are monic, irreducible, and distinct. This expression is unique up t
     \end{itemize}
 \end{enumerate}
 \end{definition}
-Note: Relatively prime polynomials $f_1, \dots, f_k$ satisfy $\gcd(f_1,\dots,f_k) = 1$, but pairwise relative primeness does not imply overall gcd is 1.
+Note: Relatively prime polynomials $f_1, \dots, f_k$ satisfy $\gcd(f_1,\dots,f_k) = 1$, but pairwise relative primeness does not imply overall greatest common divisor is 1.
 
 
 \begin{example}  
@@ -277,7 +277,7 @@ If $f(x) = (x^2 + x + 1)(x^2 - 3x^2 - 4)$ and $g(x) = (x^2 + 1)(x^2 + 3x^2 + 2)$
 
 To find the greatest common divisor, one has to divide polynomials:
 \begin{theorem} [Division Algorithm] 
-For all $p,q \in F[x]$ such that $p \neq 0$, there exist unique $s,r \in F[x]$ satisfying $\deg(r) < \deg(p)$, such that
+For all $p,q \in \mathbb{F}[x]$ such that $p \neq 0$, there exist unique $s,r \in \mathbb{F}[x]$ satisfying $\deg(r) < \deg(p)$, such that
 \[
     q(x) = s(x) \cdot p(x) + r(x).
 \]
@@ -291,31 +291,32 @@ Given $p(x) = x^4 + 1$ and $q(x) = x^2 + 1$, division gives
 \]
 \end{example}
 
-With division algorithm, one can apply {\bf Euclidean algoritm} to find the gcd of two polynomials $\gcd(f_1, f_2)$:
+With division algorithm, one can apply {\bf Euclidean algorithm} to find the greatest common divisor of two polynomials $\gcd(f_1, f_2)$:
 
-\begin{example} To find the gcd of $x^3 + 6x + 7$ and $x^2 + 3x + 2$ in $\mathbb{R}[x]$, one divide the polynomial of larger degree by that of the lower degree:
+\begin{example} To find the greatest common divisor of $x^3 + 6x + 7$ and $x^2 + 3x + 2$ in $\mathbb{R}[x]$, one divide the polynomial of larger degree by that of the lower degree:
 \[
-    x^3 + 6x + 7 - (x)(x^2 + 3x + 2) = 13x + 13
+    x^3 + 6x + 7 = (x)(x^2 + 3x + 2) + 13x + 13
 \]
 Repeat the division algorithm on the remainder:
 \[
-    x^2 + 3x + 2 - \frac{x+2}{13}(13x+13) = 0
+    x^2 + 3x + 2 = \frac{x+2}{13}(13x+13) + 0
 \]
-Now we hit a zero. Thus,
+Now we hit a zero remainder. Thus the greatest common divisor is just the remainder in the second last equation, i.e.
 \[
-    \gcd(x^3 + 6x + 7, x^2 + 3x + 2) = 13(x+1) = x + 1 \ (\text{monic}).
+    \gcd(x^3 + 6x + 7, x^2 + 3x + 2) = x + 1.
 \]
+(since we decree that the greatest common divisor is a monic polynomial).
 \end{example}
-In general, the gcd of $f_1, f_2, \dots, f_k$ can be computed inductively by:
+In general, the greatest common divisor of $f_1, f_2, \dots, f_k$ can be computed inductively by:
 $$\gcd(f_1, f_2, f_3, \dots f_k) = \gcd(\cdots(\gcd(\gcd(f_1,f_2),f_3)\cdots),f_k) $$
 
-One important aspect of gcd is the following theorem:
-\begin{theorem} [Bezout]
-Let $g = \gcd(f,h)$. Then there exist $r,s \in F[x]$ such that
+One important aspect of greatest common divisor is the following theorem:
+\begin{theorem} [Bezout] \label{thm:bezout}
+Let $g = \gcd(f,h)$. Then there exist $r,s \in \mathbb{F}[x]$ such that
 \[
     g(x) = r(x)f(x) + s(x)h(x).
 \]
-More generally, $\gcd(f_1, \dots, f_k) = g$ implies the existence of $r_i \in F[x]$ such that
+More generally, $\gcd(f_1, \dots, f_k) = g$ implies the existence of $r_i \in \mathbb{F}[x]$ such that
 \[
     g = r_1 f_1 + \dots + r_k f_k.
 \]
@@ -323,11 +324,11 @@ More generally, $\gcd(f_1, \dots, f_k) = g$ implies the existence of $r_i \in F[
 
 Now we study the case when our polynomial has a linear factor $x - \lambda$:
 \begin{theorem}  
-For $p(x) \in F[x]$ and $\lambda \in F$, $x - \lambda$ divides $p$ if and only if $p(\lambda) = 0$.
+For $p(x) \in \mathbb{F}[x]$ and $\lambda \in F$, $x - \lambda$ divides $p$ if and only if $p(\lambda) = 0$.
 \end{theorem}
 \begin{proof}  
-If $(x - \lambda)$ divides $p$, then $p = (x - \lambda)q$ for some $q \in F[x]$, so clearly $p(\lambda) = 0$.  
-Conversely, if $p(\lambda) = 0$, by Division Theorem there exists $s,r \in F[x]$ with
+If $(x - \lambda)$ divides $p$, then $p = (x - \lambda)q$ for some $q \in \mathbb{F}[x]$, so clearly $p(\lambda) = 0$.  
+Conversely, if $p(\lambda) = 0$, by Division Theorem there exists $s,r \in \mathbb{F}[x]$ with
 \[
     p = (x - \lambda)s + r, \quad \deg(r) < 1 \ \Rightarrow\ r \ \text{constant}.
 \]
@@ -339,14 +340,14 @@ A polynomial with degree $n$ has at most $n$ roots counting multiplicity.
 \end{corollary}
 
 \begin{definition} [Algebraically Closed] 
-A field $F$ is \textit{algebraically closed} if every non-constant polynomial $p(x) \in F[x]$ has a root $\lambda \in F$.
+A field $\mathbb{F}$ is \textit{algebraically closed} if every non-constant polynomial $p(x) \in \mathbb{F}[x]$ has a root $\lambda \in F$.
 \end{definition}
 
 \begin{theorem} [Fundamental Theorem of Algebra]  
 The set of complex numbers $\mathbb{C}$ is algebraically closed.
 \end{theorem}
 
-By induction, in an algebraically closed field $F$, any non-constant polynomial can be factorized as
+By induction, in an algebraically closed field $\mathbb{F}$, any non-constant polynomial can be factorized as
 \[
     p(x) = a(x - \lambda_1)^{r_1} \cdots (x - \lambda_m)^{r_m}, \quad \lambda_i \in F.
 \]
@@ -608,7 +609,7 @@ and the zero vector ${\bf 0}$ is given by ${\bf 0}(i) := {\bf 0}_{V_i}$ for all 
 
 \begin{remark}\
     \begin{itemize}
-        \item Any $f \in \bigoplus_{i \in I} V_i$ is uniquely determined by the image $f(i) \in V_i$ of $f$. For example, if $I = \{1,2,  \dots, n\}$ is a finite set, we can write:
+        \item Any $f \in \bigoplus_{i \in I} V_i$ is uniquely determined by the image $f(i) \in V_i$ of $\mathbb{F}$. For example, if $I = \{1,2,  \dots, n\}$ is a finite set, we can write:
         $$f \longleftrightarrow (\overbrace{f(1)}^{\in V_1}, \overbrace{f(2)}^{\in V_2}, \dots, \overbrace{f(n)}^{\in V_n})$$
         or if $I = \mathbb{N}$, we can write:
         $$f \longleftrightarrow (f(1), f(2), \dots, )$$
@@ -1117,7 +1118,7 @@ $$T: U^* \to \mathrm{Ann}(W)$$
 
         \item $T$ is surjective: for any $g \in \mathrm{Ann}(W)$, then for all $v = w + u \in V$, one has
          $$g(v) = g(w+u) = g(w)+g(u) = g(u).$$
-        Define $f \in U^*$ by $f(u) := g(u)$. Then $f$ is obviously linear, and 
+        Define $f \in U^*$ by $f(u) := g(u)$. Then $\mathbb{F}$ is obviously linear, and 
         $$T(f)(v) = \widetilde{f}(v) = f(u) = g(u) = g(v)$$
         for all $v \in V$. So $g = T(f) \in \mathrm{im}(T)$.
     \end{enumerate}
@@ -1553,7 +1554,7 @@ Then $\iota$ is a bilinear map, and $(V \otimes W, \iota)$ is the initial object
     $$\beta(v \otimes w) = f(v,w)$$
     for all $v \in V$ and $w \in W$. 
 \end{corollary}
-In other words, $\beta$ contains all information about $f$.
+In other words, $\beta$ contains all information about $\mathbb{F}$.
 
 
 \section{Basis of Tensor Product}
@@ -1764,7 +1765,7 @@ The cross product and determinant function in Example \ref{eg-klinear} are alter
 &f(v_1, \dots, v, \dots, v, \dots, v_k) + f(v_1, \dots, v, \dots, w, \dots, v_k) \\
 + &f(v_1, \dots, w, \dots, v, \dots, v_k) + f(v_1, \dots, w, \dots, w, \dots, v_k) = {\bf 0}    
 \end{align*}
-by $k$-linearlity of $f$. Note that the first and the last term are zero since $f$ is alternating, so
+by $k$-linearlity of $\mathbb{F}$. Note that the first and the last term are zero since $\mathbb{F}$ is alternating, so
 $$f(v_1, \dots, v, \dots, w, \dots, v_k) + f(v_1, \dots, w, \dots, v, \dots, v_k) = 0$$    
 and the result follows.
 \end{proof}
@@ -1812,7 +1813,7 @@ such that $f = \beta \circ \iota$, i.e. $\beta(v_1 \wedge \dots \wedge v_k) = f(
 Let $T: V \to W$ be a linear transformation, one can define
 $$f: V \times \dots \times V \to \wedge^k W$$
 by $f(v_1, \dots, v_k) := T(v_1) \wedge \dots \wedge T(v_k).$
-Then one can easily check that $f$ is $k$-alternating, and the universal property of exterior product implies that there exists 
+Then one can easily check that $\mathbb{F}$ is $k$-alternating, and the universal property of exterior product implies that there exists 
 $$T^{\wedge k} := \beta: \wedge^k V \to \wedge^k W$$
 satisfying $T^{\wedge k}(v_1 \wedge \dots \wedge w_k) = T(v_1) \wedge \dots \wedge T(v_k)$.
 \end{example}
