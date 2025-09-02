@@ -139,10 +139,11 @@ Now we study algebraic structure with both addition and multiplication structure
 \begin{definition}
     A {\bf ring} $(R,+,\cdot)$ is a set with two binary operations $+, \cdot: R \times R \to R$ such that:
     \begin{itemize}
-        \item $(R,+)$ is an abelian group;
+        \item $(R,+)$ is an abelian group ;
         \item $(a\cdot b) \cdot c = a \cdot (b \cdot c)$ for all $a, b, c \in R$;
         \item $(a+b)\cdot c = a\cdot c + b \cdot c$ and $c \cdot (a+b) = c\cdot a + c\cdot b$ for all $a, b, c \in R$;
     \end{itemize}
+We write $0_R$ (or simply $0$ if it does not cause confusion) as the additive identity of $(R,+)$, and $-r$ be the additive inverse of $r \in R$.
 \end{definition}
 
 \begin{example}
@@ -159,7 +160,7 @@ Unless stated otherwise, we will assume the following properties hold for a ring
 \begin{definition}
 Let $(R,+,\cdot)$ is a ring. We say $R$ is 
 \begin{itemize}
-    \item {\bf unital} if there exists $1_R \in R$ such that $1_R\cdot r=r\cdot 1_R=r$ for all $r\in R$;
+    \item {\bf unital} if there exists $1_R \in R$ (multiplicative identity) such that $1_R\cdot r=r\cdot 1_R=r$ for all $r\in R$;
     \item {\bf commutative} if $a \cdot b = b \cdot a$ for all $a, b \in R$;
 \end{itemize}
 \end{definition}
@@ -181,6 +182,9 @@ Now we can make precise which algebraic objects we can generalize from $\mathbb{
 \begin{definition}
     Let $(\mathbb{F},+,\cdot)$ be a unital commutative ring. We say $\mathbb{F}$ is a {\bf field} if for all $a \in \mathbb{F} \backslash \{0\}$, there exists $a^{-1} \in \mathbb{F} \backslash \{0\}$ such that
     $$a \cdot a^{-1} = 1.$$
+
+    In particular, $(\mathbb{F} \backslash \{0\}, \cdot)$ is an abelian group.
+    
     The {\bf characteristic} of $\mathbb{F}$ is the smallest positive integer $\mathrm{char}(\mathbb{F}) = p$ such that 
     $$\overbrace{1+1+ \dots + 1}^{p\ terms} = 0$$ 
     (if no such integer exists, then we let $\mathrm{char}(\mathbb{F}) = 0$).
