@@ -328,7 +328,7 @@ More generally, $\gcd(f_1, \dots, f_k) = g$ implies the existence of $r_i \in \m
 
 Now we study the case when our polynomial has a linear factor $x - \lambda$:
 \begin{theorem}  
-For $p(x) \in \mathbb{F}[x]$ and $\lambda \in F$, $x - \lambda$ divides $p$ if and only if $p(\lambda) = 0$.
+For $p(x) \in \mathbb{F}[x]$ and $\lambda \in \mathbb{F}$, $x - \lambda$ divides $p$ if and only if $p(\lambda) = 0$.
 \end{theorem}
 \begin{proof}  
 If $(x - \lambda)$ divides $p$, then $p = (x - \lambda)q$ for some $q \in \mathbb{F}[x]$, so clearly $p(\lambda) = 0$.  
@@ -344,7 +344,7 @@ A polynomial with degree $n$ has at most $n$ roots counting multiplicity.
 \end{corollary}
 
 \begin{definition} [Algebraically Closed] 
-A field $\mathbb{F}$ is \textit{algebraically closed} if every non-constant polynomial $p(x) \in \mathbb{F}[x]$ has a root $\lambda \in F$.
+A field $\mathbb{F}$ is \textit{algebraically closed} if every non-constant polynomial $p(x) \in \mathbb{F}[x]$ has a root $\lambda \in \mathbb{F}$.
 \end{definition}
 
 \begin{theorem} [Fundamental Theorem of Algebra]  
@@ -353,7 +353,7 @@ The set of complex numbers $\mathbb{C}$ is algebraically closed.
 
 By induction, in an algebraically closed field $\mathbb{F}$, any non-constant polynomial can be factorized as
 \[
-    p(x) = a(x - \lambda_1)^{r_1} \cdots (x - \lambda_m)^{r_m}, \quad \lambda_i \in F.
+    p(x) = a(x - \lambda_1)^{r_1} \cdots (x - \lambda_m)^{r_m}, \quad \lambda_i \in \mathbb{F}.
 \]
 
 
@@ -374,7 +374,7 @@ Let $\mathbb{F}$ be a field. A vector space $V$ over $\mathbb{F}$ is a set equip
 $$+: V \times V \to V\ (addition) \quad and \quad  \cdot: \mathbb{F} \times V \to V\ (scalar\ multiplication)$$
 such that the following holds:
 \begin{itemize}
-    \item Additive axioms - For every $x,y,z \in V$, we have
+    \item Additive axioms - $(V,+)$ is an abelian group, i.e. for every $x,y,z \in V$, we have
         \begin{enumerate}
             \item $x+y = y+x$.
             \item $(x+y)+z = x+(y+z)$.
@@ -383,7 +383,6 @@ such that the following holds:
         \end{enumerate}
     \item Multiplicative axioms - For every $x \in V$ and $\alpha, \beta \in \mathbb{F}$, we have
         \begin{enumerate}
-            \item $0 \cdot x = {\bf 0}$
             \item $1\cdot x = x$
             \item $(\alpha\beta)\cdot x = \alpha \cdot (\beta \cdot x)$
         \end{enumerate}
@@ -393,6 +392,7 @@ such that the following holds:
             \item $(\alpha+\beta)\cdot x = \alpha\cdot x + \beta\cdot x$.    
         \end{enumerate}
 \end{itemize}  
+(Exercise: Show that one can get $0 \cdot x = {\bf 0}$ by the above axioms (Hint: use $0+1 = 1$ in $\mathbb{F}$).
 
 \end{definition}
 \begin{example} \label{eg-v123}
@@ -488,7 +488,7 @@ The importance of basis is given by the following:
     \begin{equation} \label{eq-uniquelc}
     v = \alpha_1v_1 + \dots + \alpha_nv_n = \beta_1v_1' + \dots + \beta_mv_m' \tag{*}
     \end{equation}
-    for some {\it nonzero} $\alpha_i, \beta_j \in \mathbb{F}$ and $\{v_1, \dots v_n\}, \{v_1', \dots, v_m'\} \subseteq \mathcal{B}$ has no repeated elements, then one has 
+    for some {\it nonzero} $\alpha_i, \beta_j \in \mathbb{F}$ and $\{v_1, \dots v_n\}, \{v_1', \dots, v_m'\} \subseteq \mathcal{B}$ has no repeated elements (i.e. if $p \neq q$, then $v_p \neq v_q$ and $v_p' \neq v_q'$), then one has 
     \begin{enumerate}
         \item $n = m$,
         \item after some reordering of the indices, $v_i = v_i'$ and $\alpha_i = \beta_i$ for all $i$.
@@ -507,31 +507,35 @@ The importance of basis is given by the following:
     $$\alpha_{k+1} = \dots =\alpha_n = \beta_{k+1} = \dots = \beta_m = 0.$$ But the latter is impossible since we assume that all $\alpha_i, \beta_j \neq 0$, so one must have $m = n = k$, and 
     $$\alpha_i = \beta_i \quad \quad \text{for all}\ 1 \leq i \leq k.$$
 
-    \noindent $(\Leftarrow) $If all $v \in V$ can be expressed by elements in $\mathrm{Span}(\mathcal{B})$, then $\mathcal{B}$ is obviously a spanning set. Now suppose on contrary that $\mathcal{B}$ is {\bf not} linearly independent, then there exists $\{b_1,\dots, b_n\} \subseteq \mathcal{B}$ and $\gamma_1, \dots, \gamma_n$ not all zeros such that
+    \noindent $(\Leftarrow) $If all $v \in V$ can be expressed by elements in $\mathrm{Span}(\mathcal{B})$, then $\mathcal{B}$ is obviously a spanning set for $V$. Now suppose on contrary that $\mathcal{B}$ is {\bf not} linearly independent, then there exists a finite subset $\{b_1,\dots, b_n\} \subseteq \mathcal{B}$ and $\gamma_1, \dots, \gamma_n \in \mathbb{F}$ not all zeros such that
     $$\gamma_1b_1 + \dots + \gamma_nb_n = {\bf 0}$$
     By reordering the indices in the above expression, we assume $\gamma_1 \neq 0$ without loss of generality. Then
     $$v := b_1 = (-\frac{\gamma_2}{\gamma_1}) b_2 + \dots + (-\frac{\gamma_n}{\gamma_1})b_n$$
-    are two different expressions of $v$ in $\mathrm{Span}(\mathcal{B})$, a contradiction. Then $\mathcal{B}$ is both a spanning set and linearly independent, and hence forms a basis of $V$.
+    are two different expressions of $v$ in $\mathrm{Span}(\mathcal{B})$, a contradiction. 
+    
+    Therefore, $\mathcal{B}$ is both a spanning set and linearly independent, and hence forms a basis of $V$.
 \end{proof}
 
-The following theorem are given in MAT2042 in the finite dimensional case:
+
+Suppose $V$ is {\bf finitely generated}, i.e. $V =\mathrm{Span}\{v_1, \dots, v_n\}$ can be spanned by a {\it finite} set of vectors, then the following theorem are given in MAT2042:
 \begin{theorem} \label{thm-basisextension}
     Let $V$ be a vector space over $\mathbb{F}$. Then the following holds:
     \begin{enumerate}
         \item $V$ has a basis.
         \item (Basis Extension Theorem) Let $\mathcal{L}$ be a linearly independent set in $V$, then one can extend $\mathcal{L}$ to $\mathcal{B} = \mathcal{L} \sqcup \mathcal{L}'$ such that $\mathcal{B}$ is a basis of $V$.
-        \item Let $\mathcal{S}$ be a linearly independent set in $V$, then there exists a subset $\mathcal{B} \subseteq \mathcal{S}$ such that $\mathcal{B}$ is a basis of $V$.
+        \item Let $\mathcal{S}$ be a spanning set in $V$, then there exists a subset $\mathcal{B} \subseteq \mathcal{S}$ such that $\mathcal{B}$ is a basis of $V$.
         \item All bases of $V$ have the same cardinality.
     \end{enumerate}
 \end{theorem}
-In this course, the {\bf cardinality} of any set is equal to one of the following three possibilities:
-\begin{itemize}
-    \item a finite number $n \in \mathbb{N}$;
-    \item infinity $\infty$ (and countable);
-    \item infinity $\infty$ (and {\bf un}countable)
-\end{itemize}
+Indeed, the theorem holds regardless of the finitely generated-ness of $V$. More precisely, (1) - (3) follows from  Zorn's Lemma, which in turn relies on Axiom of Choice. The proofs are not very hard, which the interested readers are invited to read.
 
-Given the last statement of the theorem above, we have:
+As for (4), the {\bf cardinality} of any set $S$ is defined (in this course) to one of the following three possibilities:
+\begin{itemize}
+    \item a finite number $n \in \mathbb{N}$ (i.e. $|S|= n$) ;
+    \item infinity $\infty$ and countable (i.e. $|S| = \aleph_0$);
+    \item infinity $\infty$ and {\bf un}countable (i.e. $|S| > \aleph_0$).
+\end{itemize}
+In most cases, we will not distinguish the latter $2$ infinities and simply write $|S| = \infty$. Given the validity of this statement, we have:
 \begin{definition}
     Let $V$ be a vector space over $\mathbb{F}$. Then the {\bf dimension} $\dim(V)$ of $V$ is the cardinality of any basis of $V$.
 \end{definition}
@@ -569,27 +573,32 @@ $$w_1 := \begin{pmatrix} 1\\ 1\\0 \end{pmatrix} = \begin{pmatrix} 1\\ 0\\0 \end{
 with $w_1 + w_2 = {\bf 0}$ yet $w_1, w_2 \neq {\bf 0}$. So the sum $W_1 + W_2$ is {\bf not} direct.
 
 \smallskip
-More generally, for {\bf two} vector subspaces $W_1, W_2 \leq V$, one can check from that above definition that
-$$W_1 + W_2 = W_1 \oplus W_2$$
-iff $W_1 \cap W_2 = \{\bf 0\}$. 
+In the special case if there are only {\bf two} vector subspaces $W_1, W_2 \leq V$, one can check from that above definition that
+\begin{center}
+$W_1 + W_2 = W_1 \oplus W_2$ \quad if and only if \quad $W_1 \cap W_2 = \{\bf 0\}$. 
+\end{center}
 \begin{theorem}
     Let $V$ be a vector space over $\mathbb{F}$, and $\{W_i\ |\ i \in I\}$ be a collection of vector subspaces of $V$ such that
     $\bigoplus_{i \in I} W_i$ is a direct sum. Suppose $\mathcal{B}_i$ is a basis of $W_i$, then $$\mathcal{B} = \bigsqcup_{i\in I} \mathcal{B}_i$$ is a basis of $\bigoplus_{i \in I} W_i$.
 \end{theorem}
 \begin{proof}
-To begin with, we show that all $v \in V$ can be uniquely written as elements of the form $w_{i_1} + \dots + w_{i_k}$ for some $w_{i_l} \in W_{i_l}$. Indeed, suppose 
+We need to show that all $v \in \bigoplus_{i \in I} W_i$ can be uniquely written as elements of the form $w_{i_1} + \dots + w_{i_k}$ for some $w_{i_l} \in W_{i_l}$. Indeed, suppose 
 $$v = w_{i_1} + \dots + w_{i_n} = w_{j_1}' + \dots + w_{j_m}',$$
 for some nonzero vectors $w_{\bullet} \in W_{\bullet}$. Then by reordering the indices and subtraction as in the proof of Theorem \ref{thm-uniquesum}, one assumes 
 that 
 $$\{i_1, \dots, i_n\} \cap \{j_1, \dots, j_m\} = \{i_1 = j_1, \dots, i_k = j_k\}$$ 
 and
 $${\bf 0} = (w_{i_1}-w_{j_1}') + \dots + (w_{i_k}-w_{i_k}') + w_{i_{k+1}} + \dots + w_{i_n} - w_{j_{k+1}}' - \dots - w_{j_m},$$
-where each term in the summand is in the same vector subspace $W_{\bullet} \leq V$. By the definition of direct internal sum, all the summand in the above equation must be ${\bf 0}$, and one must have
+where each term in the summand is in the same vector subspace $W_{\bullet} \leq \bigoplus_{i \in I} W_i$. By the definition of direct internal sum, all the summand in the above equation must be ${\bf 0}$, and one must have
 $m = n = k$ and $w_{i_1} = w_{j_1}'$, $\cdots$, $w_{i_k} = w_{i_k}'$.
 
-Now we proceed to proving that $\mathcal{B}$ is a basis. In view of Theorem \ref{thm-uniquesum}, it suffices to show that all $v \in V $ can be uniquely written as an element in $\mathrm{Span}(\mathcal{B})$. By definition of direct internal sum, it is obvious that $v \in \mathrm{Span}(\mathcal{B})$. Moreover, in such a case, one has
-$$v = b_{i_1} + \dots + b_{i_k}, \quad \quad b_{i_l} \in \mathrm{Span}(\mathcal{B}_{i_l}).$$
-But $b_{i_l} = \mathrm{Span}(\mathcal{B}_{i_l}) = W_{i_l}$, so the arguments in the beginning of the proof implies that the $W_{i_l}$'s appearing in the summand of $v$ is unique, and each $b_{i_l} \in W_{i_l}$ is uniquely determined. Furthermore, the expression of each $b_{i_l}$ by the linear combination of $\mathcal{B}_{i_l}$ is also unique since it is a basis of $W_{i_l}$. So the expression of $v$ in terms of $\mathrm{Span}(\mathcal{B})$ is unique, and the result follows.
+Now we proceed to proving that $\mathcal{B}$ is a basis. In view of Theorem \ref{thm-uniquesum}, it suffices to show that all $v \in \bigoplus_{i \in I} W_i$ can be uniquely written as an element in $\mathrm{Span}(\mathcal{B})$. 
+
+To see so, note that 
+$$v = w_{i_1} + \dots + w_{i_n}$$
+and $w_{i_j} \in W_{i_j} = \mathrm{Span}(\mathcal{B}_{i_j})$ for each $1 \leq j \leq n$. Therefore, $v$ is a linear combination of $\sqcup_{j = 1}^n \mathcal{B}_{i_j} \subseteq \mathcal{B}$.
+
+Moreover, by the arguments in the beginning of the proof the $W_{i_l}$'s appearing in the summand of $v$ is unique, and each $w_{i_l} \in W_{i_j}$ is uniquely expressed by the linear combination of $\mathcal{B}_{i_j}$'s. So the expression of $v$ in terms of $\mathrm{Span}(\mathcal{B})$ is unique, and the result follows.
 \end{proof}
 
 As an immediate consequence of the above theorem, one has:
@@ -754,7 +763,7 @@ Let $v + W$, $u + W$ be cosets.
 \begin{example} \
 \begin{enumerate}
     \item Let $V = \mathbb{R}^3$ and $W$ is the $xy$-plane as in Example \ref{eg-xyplane}. We have seen that there are a lot of repetitions $v + W = v' + W$. But they are all be reduced to
-    $$V/W := \left\{ \begin{pmatrix} 0 \\ 0 \\ z \end{pmatrix} + W\ |\ z \in \mathbb{R}\right\}$$
+    $$V/W := \left\{ \begin{pmatrix} 0 \\ 0 \\ z \end{pmatrix} + W\ \Bigg|\ z \in \mathbb{R}\right\}$$
     and the operations are given by 
     \begin{align*} 
     \left(\begin{pmatrix} 0 \\ 0 \\ z_1 \end{pmatrix} + W\right) + \left(\begin{pmatrix} 0 \\ 0 \\ z_2 \end{pmatrix} + W\right) &= \begin{pmatrix} 0 \\ 0 \\ z_1+z_2 \end{pmatrix} + W,\\ \alpha\left(\begin{pmatrix} 0 \\ 0 \\ z \end{pmatrix} + W\right) &= \begin{pmatrix} 0 \\ 0 \\ \alpha z \end{pmatrix} + W.
@@ -2635,7 +2644,7 @@ In order to generalize the above theorem for all $R$, $\pm 1$ is replaced by {\b
 $$U(R):=\{a\in R\ |\text{ there exists }b\in R\text{ such that }a\cdot b=1\}.$$
 In particular, $U(\mathbb{Z}) = \{\pm 1\}$. 
 
-As for a generalization of prime elements in $R$, Here is one possibility:
+As for a generalization of prime elements in $R$, here is one possibility:
 
 \begin{definition}
     Let $R$ be an integral domain. An element $r\in R$ is {\bf irreducible} if
@@ -2837,7 +2846,7 @@ So $N' \cong M/N$, and (1) is proved.
 \end{proof}
 
 \begin{theorem}
-    Let R be a PID, and M is finitely generated $R$-module, Then there exixts $M_{free}\leq N$, such that $M_{free}$ is a finitely generated free module, and 
+    Let R be a PID, and M is finitely generated $R$-module, Then there exists $M_{free}\leq N$, such that $M_{free}$ is a finitely generated free module, and 
     $$M=M_{free}\oplus M_{tor}$$
     Moreover, if $M=F\oplus T$, for some free module $F\leq M$ and torsion module $T\leq M$, we have 
     $$T=M_{tor},\quad F\cong M_{free}(\cong R^n)$$
@@ -3216,7 +3225,7 @@ R/\langle p_k^{e_{k,1}} \rangle \oplus \cdots \oplus R/\langle p_k^{e_{k,a_k}} \
 \end{corollary}
 
 \section{Finitely Generated Abelian Groups}
-As a direct application of the classification theorem, we have the classification of all abliean groups, i.e. a group $G$ (Definition \ref{def-group}) satisfying 
+As a direct application of the classification theorem, we have the classification of all abelian groups, i.e. a group $G$ (Definition \ref{def-group}) satisfying 
 $$a \ast b = b \ast a$$
 for all $a, b \in G$. In such a case, we usually make the following convention:
 \begin{itemize}
