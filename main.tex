@@ -577,6 +577,18 @@ In the special case if there are only {\bf two} vector subspaces $W_1, W_2 \leq 
 \begin{center}
 $W_1 + W_2 = W_1 \oplus W_2$ \quad if and only if \quad $W_1 \cap W_2 = \{\bf 0\}$. 
 \end{center}
+
+\begin{example}
+    Let $V = \mathbb{F}[x]$ and for $i \in \mathbb{N} \cup \{0\}$, let $W_i := \mathrm{Span}\{x^i\}$. Then $\sum_{i \in \mathbb{N} \cup \{0\}} W_i = \bigoplus_{\mathbb{N} \cup \{0\}} W_i$ is a direct sum -- indeed, suppose
+    $$w_{i_1} = \alpha_1 x^{i_1} \in W_{i_1}, \quad w_{i_2} = \alpha_1 x^{i_2} \in W_{i_2}, \quad \dots, \quad w_{i_k} = \alpha_k x^{i_k} \in W_{i_k}$$
+    ($\alpha_i \in \mathbb{F}$) be such that
+    $$w_{i_1} + w_{i_2} + \dots + w_{i_k} = \alpha_1 x^{i_1} + \alpha_2 x^{i_2} + \dots + \alpha_k x^{i_k} = {\bf 0}.$$
+    where ${\bf 0} \in V$ is the zero polynomial. Without loss of generality, assume $i_1 < i_2 < \dots < i_k$. Then the above equation implies that
+    $$\alpha_1 x^{i_1} + \alpha_2 x^{i_2} + \dots + \alpha_k x^{i_k} = 0 + 0x + 0x^2 
+    +\dots + 0x^{i_1} + \dots + 0x^{i_2} + \dots + 0x^{i_k}$$
+    By comparing the coefficients of $x^{i_l}$, one can conclude that $\alpha_l = 0$ for all $1 \leq l \leq k$, and hence $w_{i_l} = {\bf 0}$ for all $l$.
+\end{example}
+
 \begin{theorem}
     Let $V$ be a vector space over $\mathbb{F}$, and $\{W_i\ |\ i \in I\}$ be a collection of vector subspaces of $V$ such that
     $\bigoplus_{i \in I} W_i$ is a direct sum. Suppose $\mathcal{B}_i$ is a basis of $W_i$, then $$\mathcal{B} = \bigsqcup_{i\in I} \mathcal{B}_i$$ is a basis of $\bigoplus_{i \in I} W_i$.
